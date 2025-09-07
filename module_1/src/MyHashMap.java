@@ -39,15 +39,21 @@ public class MyHashMap<K, V> {
     }
 
     private int hash(K key) {
-        return (key == null) ? 0 : Math.abs(key.hashCode() % capacity);
+        int h = key == null ? 0 : key.hashCode();
+        h ^= (h >>> 16);
+        return h;
+    }
+
+    private int indexFor(int hash, int length) {
+        return hash & (length - 1);
     }
 
     public void put(K key, V value) {
         if ((float) size / capacity >= loadFactor) {
             resize();
         }
-
-        int index = hash(key);
+        int h = hash(key);
+        int index = indexFor(h, table.length);
         Entry<K, V> current = table[index];
 
         if (current == null) {
@@ -70,7 +76,8 @@ public class MyHashMap<K, V> {
     }
 
     public V get(K key) {
-        int index = hash(key);
+        int h = hash(key);
+        int index = indexFor(h, table.length);
         Entry<K, V> current = table[index];
         while (current != null) {
             if (Objects.equals(current.key, key)) {
@@ -82,7 +89,8 @@ public class MyHashMap<K, V> {
     }
 
     public void remove(K key) {
-        int index = hash(key);
+        int h = hash(key);
+        int index = indexFor(h, table.length);
         Entry<K, V> current = table[index];
         Entry<K, V> prev = null;
 
@@ -107,13 +115,15 @@ public class MyHashMap<K, V> {
         capacity *= 2;
         Entry<K, V>[] oldTable = table;
         table = new Entry[capacity];
-        size = 0;
 
         for (int i = 0; i < oldCapacity; i++) {
             Entry<K, V> current = oldTable[i];
             while (current != null) {
-                put(current.key, current.value);
-                current = current.next;
+                Entry<K, V> next = current.next;
+                int index = indexFor(hash(current.key), capacity);
+                current.next = table[index];
+                table[index] = current;
+                current = next;
             }
         }
     }
@@ -130,7 +140,8 @@ public class MyHashMap<K, V> {
         }
 
         System.out.println("Size: " + map.size()); // 20
-        System.out.println("Get Key6: " + map.get("Key6")); // 10
+        System.out.println("Get Key11: " + map.get("Key11")); // 11
+        System.out.println("Get Key6: " + map.get("Key6")); // 6
         map.remove("Key11");
         System.out.println("Get Key11 after remove: " + map.get("Key11")); // null
     }
