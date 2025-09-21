@@ -22,10 +22,10 @@ public class Main {
                 String choice = sc.nextLine().trim();
                 try {
                     switch (choice) {
-                        case "1": createUser(sc); break;
-                        case "2": getUserById(sc); break;
-                        case "3": listUsers(); break;
-                        case "4": updateUser(sc); break;
+                        case "1": updateUser(sc); break;
+                        case "2": createUser(sc); break;
+                        case "3": getUserById(sc); break;
+                        case "4": listUsers(); break;
                         case "5": deleteUser(sc); break;
                         case "0": running = false; break;
                         default: System.out.println("Unknown command");
@@ -44,10 +44,10 @@ public class Main {
 
     private static void printMenu() {
         System.out.println("\nMenu:");
-        System.out.println("1) Create user");
-        System.out.println("2) Find by ID");
-        System.out.println("3) Get All");
-        System.out.println("4) Update user");
+        System.out.println("1) Update user");
+        System.out.println("2) Create user");
+        System.out.println("3) Find by ID");
+        System.out.println("4) Get All");
         System.out.println("5) Delete user");
         System.out.println("0) Exit");
         System.out.print("Exit: ");
