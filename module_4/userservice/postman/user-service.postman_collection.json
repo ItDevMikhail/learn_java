@@ -1,0 +1,65 @@
+{
+  "info": {
+    "name": "User Service API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+    "description": "CRUD операции для UserController",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get all users",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/users"
+      }
+    },
+    {
+      "name": "Get user by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/users/1"
+      }
+    },
+    {
+      "name": "Create user",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Michael\",\n  \"email\": \"michael@example.com\",\n  \"age\": 33\n}"
+        },
+        "url": "{{baseUrl}}/api/users"
+      }
+    },
+    {
+      "name": "Update user",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated\",\n  \"email\": \"updated@example.com\",\n  \"age\": 40\n}"
+        },
+        "url": "{{baseUrl}}/api/users/1"
+      }
+    },
+    {
+      "name": "Delete user",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/users/1"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
