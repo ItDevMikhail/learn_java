@@ -1,0 +1,7 @@
+com\example\notificationservice\api\NotificationController$NotifyRequest.class
+com\example\notificationservice\email\EmailService.class
+com\example\notificationservice\model\NotificationEvent.class
+com\example\notificationservice\model\Operation.class
+com\example\notificationservice\api\NotificationController.class
+com\example\notificationservice\kafka\UserEventListener.class
+com\example\notificationservice\NotificationServiceApplication.class
